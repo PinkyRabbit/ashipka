@@ -11,6 +11,7 @@ var passport = require('passport');
 var index = require('./routes/index');
 var login = require('./routes/login');
 
+var scripts_doprobiv = require('./routes/scripts/doprobiv');
 
 var admin = require('./routes/admin');
 var admin_users = require('./routes/admin/users');
@@ -92,6 +93,9 @@ app.use(['/admin/','/editpost/'],
 
 app.use('/', index);
 app.use('/login', login);
+
+app.use('/scripts/doprobiv', scripts_doprobiv);
+
 
 app.use('/admin', admin);
 app.use('/admin/users', admin_users);

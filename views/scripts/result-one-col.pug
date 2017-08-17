@@ -1,0 +1,8 @@
+extends ../layout
+
+block content
+  .col-xs-12
+    form
+      .form-group
+        textarea.form-control#result(readonly) #{ result ? result : 'Пришёл пустой результат! Возможно, так и должно было произойти.' }
+  script(src="/javascripts/1field.js")

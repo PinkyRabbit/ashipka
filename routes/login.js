@@ -10,11 +10,9 @@ var passport = require('passport')
 
 router.get('/', function(req, res) {
   if(req.isAuthenticated()){
-    setTimeout(function() {
-      req.flash('success','Добро пожаловать домой!');
-      res.location('/admin');
-      res.redirect('/admin');
-    }, 3500);
+    req.flash('success','Добро пожаловать домой!');
+    res.location('/admin');
+    res.redirect('/admin');
   } else {
     res.render('admin/index-off', { 
       "title": "Представься, Вершитель!"

@@ -77,3 +77,6 @@ pre.preerr{
 .panel-heading span{
   padding: 5px
 }
+.text-muted {
+  color: #5a5a5a;
+}

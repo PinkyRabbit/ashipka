@@ -1,0 +1,46 @@
+body {
+  padding-top: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+form{
+  padding-bottom: 10px
+}
+#title{
+  background: #272727;
+  color: #c7cc00;
+  border-bottom: 1px solid #333333;
+}
+#title h1{
+  font-size: 14px;
+  padding: 0;
+  margin: 3px 0;
+}
+a {
+  color: #00B7FF;
+}
+#main{
+  padding-top: 15px;
+}
+.alert-info h3,
+.alert-warning h3{
+  margin-left: 20px;
+  margin: 0;
+}
+#inpmess{
+  width: 95%;
+  text-align: center;
+}
+#inpmess input{
+  width: 95%;
+}
+#messages{
+  background: #006d00;
+  color: #00ff00;
+  border: 1px solid #444444;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.panel-heading .label{
+  margin: 0 0 10px;
+  display: block;
+}

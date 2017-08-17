@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  .col-xs-12.col-sm-4
+    section#form-description
+      h3 Место для гениальных идей
+      p Если вы нашли что-то годное, что можно реализовать - напишите тут, рано или поздно - руки дойдут
+    form(action="/",method="post")
+      .form-group#name
+        label(for="name") Имя или ник
+        input.form-control(type="text", name="name")
+      .form-group
+        label(for="idea") Гениальная идея
+        textarea.form-control#idea(name="idea", placeholder="Например, нужно завоевать галлактику за 28 часов.")
+      button.btn.btn-primary.btn-block(type="submit") Увековечить нетленку
+  .col-xs-12.col-sm-8
+    each idea,i in ideas
+      .col-xs-12.col-sm-6.col-md-4
+        div(class="panel "+(idea.done===true ? 'panel-default' : 'panel-warning'))
+          .panel-heading
+            if idea.done===true
+              span.label.label-primary Сделано
+            h3.panel-title= idea.owner
+            p(style="margin: 5px 0 0 0;padding: 0", class= idea.done===true ? 'hidden' : 'text-info')
+              span.glyphicon.glyphicon-time(aria-hidden="true")
+              |  #{idea.date}
+          .panel-body(class= idea.done===true ? 'text-muted' : '')= idea.idea
+  script.
+    $(function() {
+      frameres();
+      setTimeout(function() {
+        frameres();
+      }, 5000);
+      $(window).on('resize', function(){
+        frameres();
+      });
+      function frameres(){
+        if(($(window).height()*3>$(window).width())&&($(window).width()>767)){
+          var messhei = $(window).height()-$('nav').outerHeight(true)-$('#form-description').outerHeight(true)-$('#name').outerHeight(true)-$('.btn-block').outerHeight(true)-100;
+          $('#idea').css({
+            'height': messhei+'px',
+            'max-height': messhei+'px'  
+          });
+        }else{
+          $('#idea').css({
+            'height': '200px',
+            'max-height': '200px'  
+          });
+        }
+
+      }
+    }());

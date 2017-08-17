@@ -15,6 +15,12 @@ form{
   padding: 0;
   margin: 3px 0;
 }
+#flash{
+  border-top: 2px solid #333333;
+  background: #080808;
+  color: #92feff;
+  padding: 5px
+}
 a {
   color: #00B7FF;
 }
@@ -43,4 +49,28 @@ a {
 .panel-heading .label{
   margin: 0 0 10px;
   display: block;
+}
+.btn-danger,
+.btn-danger:hover{
+    color: #ffffff;
+    background-color: #a93333;
+    border-color: #fff;
+}
+.btn-danger:hover{
+  box-shadow: 0 0 12px #ffffff
+}
+ul.alert{
+  list-style: none
+}
+ul.alert li{
+  margin: 5px
+}
+.alert-danger {
+  color: #ff9292;
+}
+.jumbotron>hr {
+    border-top: 2px dashed #222;
+}
+pre.preerr{
+  color: #8e0040
 }

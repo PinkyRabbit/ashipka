@@ -30,12 +30,26 @@ html(lang="ru")
               ul.dropdown-menu
                 li
                   a(href="#") Action
-          //- ul.nav.navbar-nav.navbar-right
-          //-   li
-          //-     a(href="../navbar/") Default
-    section#title
-      .container
-        h1= h1?h1:title
+          if locals.authxyz===true
+            ul.nav.navbar-nav.navbar-right
+              li.dropdown
+                a(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false")
+                  | Действуй, Вершитель!
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href="/admin") Главная админки
+                  li
+                    a(href="/admin/users") Создать админа
+              li.dropdown
+                li
+                  a(href="/admin/users/logout")
+                    span.glyphicon.glyphicon-log-out(aria-hidden="true")
+    if !error
+      section#title
+        .container
+          h1= h1?h1:title
+    != messages('messages', locals)
     .container
       .row#main
         

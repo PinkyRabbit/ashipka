@@ -1,0 +1,4 @@
+each type in Object.keys(messages)
+  each message in messages[type]
+    section#flash
+      .container.text-center!= message

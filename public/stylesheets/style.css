@@ -74,3 +74,6 @@ ul.alert li{
 pre.preerr{
   color: #8e0040
 }
+.panel-heading span{
+  padding: 5px
+}

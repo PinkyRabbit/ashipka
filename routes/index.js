@@ -30,7 +30,7 @@ router.post('/', function(req, res) {
         console.log('ERROR', err);
         res.send(err);
       } else {
-        req.flash('success','Статья была успешно добавлена!');
+        req.flash('success','Идея была успешно опубликована!');
         // res.location('/');
         res.redirect('/');
       }

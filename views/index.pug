@@ -20,6 +20,11 @@ block content
           .panel-heading
             if idea.done===true
               span.label.label-primary Сделано
+            else if locals.authxyz===true
+              a.js-upEvent.text-info(href="#", data-up=idea._id)
+                span.glyphicon.glyphicon-ok(aria-hidden="true")
+              a.js-deleteEvent.text-info(href="#", data-delete=idea._id)
+                span.glyphicon.glyphicon-trash(aria-hidden="true")
             h3.panel-title= idea.owner
             p(style="margin: 5px 0 0 0;padding: 0", class= idea.done===true ? 'hidden' : 'text-info')
               span.glyphicon.glyphicon-time(aria-hidden="true")
@@ -47,6 +52,29 @@ block content
             'max-height': '200px'  
           });
         }
-
       }
+      $('.js-deleteEvent').on('click',function(e){
+        e.preventDefault();
+        var r = confirm("Удаляем?");
+        if (r == true) {
+          var deleteId = $(this).data('delete');
+          $.ajax({
+            url : '/admin/idea/del/'+deleteId,
+            type : "DELETE",
+            success : function(result){
+              console.log(result);
+            }
+          });
+          window.location = '/';
+        }
+      });
+      $('.js-upEvent').on('click',function(e){
+        e.preventDefault();
+        var r = confirm("Можно считать завершённым?");
+        if (r == true) {
+          var upId = $(this).data('up');
+          window.location = '/admin/idea/up/'+upId;
+        }
+      });
+
     }());

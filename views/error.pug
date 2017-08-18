@@ -3,5 +3,5 @@ extends layout
 block content
   h1= message
   h2= error.status
-  //- if locals.authxyz===true
-  pre.preerr #{error.stack}
+  if locals.authxyz===true
+    pre.preerr #{error.stack}

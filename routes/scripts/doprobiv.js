@@ -30,7 +30,7 @@ router.post('/', function(req, res) {
         if(x.substring(0,4)!='http') x = 'http://' + x;
         if(x.substring(0,5)==='https') x = x.replace("https://", 'http://');
         if(x.substring(7,11)==='www.') x = x.replace("http://www.", 'http://');
-        console.log(patt2.exec(x)[0]);
+        // console.log(patt2.exec(x)[0]);
         return patt2.exec(x)[0]
       })
       
@@ -44,17 +44,17 @@ router.post('/', function(req, res) {
         if(x.substring(7,11)==='www.') x = x.replace("http://www.", 'http://');
         return patt2.exec(x)[0]
       })
-    console.log('======');
-    console.log(leftarr.length);
-    console.log('======');
-    console.log(rightarr.length);
+    // console.log('======');
+    // console.log(leftarr.length);
+    // console.log('======');
+    // console.log(rightarr.length);
     Array.prototype.diff = function(a) {
         return this.filter(function(i) {return a.indexOf(i) < 0;});
     };
     
     resultarr = leftarr.diff(rightarr);
-    console.log('======');
-    console.log(resultarr.length);
+    // console.log('======');
+    // console.log(resultarr.length);
     var result = resultarr.join("\r\n");
     
     req.flash('info','Задача успешно обработана!');

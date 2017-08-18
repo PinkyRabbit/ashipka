@@ -28,23 +28,33 @@ router.post('/', function(req, res) {
       })
       .map(function(x) {
         if(x.substring(0,4)!='http') x = 'http://' + x;
-        return patt2.exec(x)
+        if(x.substring(0,5)==='https') x = x.replace("https://", 'http://');
+        if(x.substring(7,11)==='www.') x = x.replace("http://www.", 'http://');
+        console.log(patt2.exec(x)[0]);
+        return patt2.exec(x)[0]
       })
+      
     var rightarr = req.body.right
       .split("\r\n")
       .filter(function(x) {
         return patt2.test(x)
       })
       .map(function(x) {
-        return patt2.exec(x)
+        if(x.substring(0,5)==='https') x = x.replace("https://", 'http://');
+        if(x.substring(7,11)==='www.') x = x.replace("http://www.", 'http://');
+        return patt2.exec(x)[0]
       })
-    
+    console.log('======');
+    console.log(leftarr.length);
+    console.log('======');
+    console.log(rightarr.length);
     Array.prototype.diff = function(a) {
         return this.filter(function(i) {return a.indexOf(i) < 0;});
     };
     
     resultarr = leftarr.diff(rightarr);
-    
+    console.log('======');
+    console.log(resultarr.length);
     var result = resultarr.join("\r\n");
     
     req.flash('info','Задача успешно обработана!');

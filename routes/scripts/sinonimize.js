@@ -9,9 +9,9 @@ router.get('/', function(req, res) {
 });
 
 router.get('/word/:word', function(req, res) {
-  console.log('==>'+req.params.word+'<==');
+  // console.log('==>'+req.params.word+'<==');
   synonymize(req.params.word).then(response => {
-    console.log('response = '+ response);
+    // console.log('response = '+ response);
     res.send(response.join('|'));
     // console.log(response); // => [ 'автомобиль', 'аппарат', 'спорткар', 'more 20 items...' ]
     // console.log(response[2]); // => 'спорткар'

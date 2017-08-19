@@ -13,6 +13,7 @@ var login = require('./routes/login');
 
 var scripts_doprobiv = require('./routes/scripts/doprobiv');
 var scripts_avtozamena = require('./routes/scripts/avtozamena');
+var scripts_sinonimize = require('./routes/scripts/sinonimize');
 
 var admin = require('./routes/admin');
 var admin_users = require('./routes/admin/users');
@@ -97,6 +98,7 @@ app.use('/login', login);
 
 app.use('/scripts/doprobiv', scripts_doprobiv);
 app.use('/scripts/avtozamena', scripts_avtozamena);
+app.use('/scripts/sinonimize', scripts_sinonimize);
 
 
 app.use('/admin', admin);

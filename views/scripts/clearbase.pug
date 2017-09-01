@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .alert.alert-success
+    span.glyphicon.glyphicon-info-sign(aria-hidden="true")
+    |  У нас есть много сайтов. Нужно удалить дубли по доменам. Какбэ всё.
+  .progress(style="display:none")
+    .progress-bar#bar(role="progressbar" style="width: 0%")
+  form#form(method="post",action="/scripts/clearbase")
+    .col-xs-12
+      .form-group
+        label(for="text") Ссылочки
+        textarea.form-control#text(name="text", placeholder="Может быть, вообще всё на свете легко и просто, только мне об этом ещё не рассказали? И я сижу тут, страдаю как последний дурак, пока очевидное решение уже пляшет на кончиках моих пальцев. ©Макс Фрай. Вся правда о нас.")
+      button.btn.btn-primary.pull-right(type="submit") Обработать
+  script(src="/javascripts/1field.js")

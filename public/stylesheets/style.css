@@ -80,3 +80,11 @@ pre.preerr{
 .text-muted {
   color: #5a5a5a;
 }
+.error-details{
+  color: #f99ff2;
+  padding: 10px;
+  background-color: #151017;
+}
+.has-error label{
+  color: #f00
+}

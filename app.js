@@ -2,9 +2,9 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
 var expressValidator = require('express-validator');
 var passport = require('passport');
 
@@ -19,6 +19,7 @@ var scripts_clearbase = require('./routes/scripts/clearbase');
 var admin = require('./routes/admin');
 var admin_users = require('./routes/admin/users');
 
+// app start
 var app = express();
 
 // view engine setup
@@ -34,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret:'secret-ash1',
+  secret:'secretash1',
   resave: true,
   saveUninitialized: true
 }));
@@ -62,6 +63,8 @@ app.use(expressValidator({
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
+  // console.log('res.locals.messages = '+res.locals.messages);
+  // console.log('==============');
   next();
 });
 

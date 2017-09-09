@@ -5,14 +5,14 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('pr-ashipka:server');
+var debug = require('debug')('ashipka.pw:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort('8000');
 app.set('port', port);
 
 /**

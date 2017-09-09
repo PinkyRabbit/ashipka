@@ -10,18 +10,23 @@ block content
   .alert.alert-success
     span.glyphicon.glyphicon-info-sign(aria-hidden="true")
     |  Суть скрипта в том, что в текстах/тексте из левой колонки мы ищем что-то, что вы указали для поиска. Когда совпадение найдено, берётся строка справа, и вставляется на месте совпадениея. Дальше ищется следующее совпадение. Если оно находится - берётся следующая строка справа. И так, пока текст слева не закончится.
-  form(method="post",action="/scripts/avtozamena")
+  form#form(method="post", action="/scripts/avtozamena", enctype="multipart/form-data")
     .col-xs-12#input-top
       .form-group
         label(for="search") Что ищем
-        input.form-control#search(type="text", name="search", value= form ? form.search : 'Яндекс')
+        input.form-control#search(type="text", name="search", value= form ? form.search : '')
     .col-xs-8
       .form-group
         label(for="text") Текст
-        textarea.js-fixbox.form-control#text(type="text", name="text", placeholder="Есть одно правило, которое я стараюсь соблюдать во что бы то ни стало: всякое дело должно быть доведено до конца тем, кто его начал. Макс Фрай.")= form ? form.text : ' Пример текста: Яндекс — российская транснациональная компания, владеющая одноимённой системой поиска в Сети, интернет-порталами и службами в нескольких странах. Наиболее заметное положение занимает на рынках России, Турции, Белоруссии и Казахстана. Поисковая система «Яндекс» является четвёртой среди поисковых систем мира по количеству обработанных поисковых запросов (свыше 6,3 млрд в месяц на начало 2014 года). По состоянию на 11 декабря 2016 года, согласно рейтингу Alexa.com, сайт yandex.ru по популярности занимает 27-е место в мире и первое место в России. Поисковая система Yandex.ru была официально анонсирована 23 сентября 1997 года, и первое время развивалась в рамках компании CompTek International. Как отдельная компания Яндекс образовалась в 2000 году. В мае 2011 года Яндекс провёл первичное размещение акций, заработав на этом больше, чем какая-либо из Интернет-компаний со времён IPO поисковика Google в 2004 году. Приоритетное направление компании - разработка поискового механизма, но за годы работы «Яндекс» стал мультипорталом. В 2016 году «Яндекс» предоставляет более 50 служб. Некоторые из них — Яндекс.Поиск, Яндекс.Карты, Яндекс.Маркет, Поиск по блогам, Яндекс.Пробки — доминируют на рынке.'
+        textarea.js-fixbox.form-control#text(type="text", name="text", placeholder="Есть одно правило, которое я стараюсь соблюдать во что бы то ни стало: всякое дело должно быть доведено до конца тем, кто его начал. Макс Фрай.")= form ? form.text : ''
+      .form-group#file
+        label(for="myfile") Загрузите файл
+        input(type="file", name="myfile")
+        p.help-block Если длина текста больше 30 000 знаков, загрузите его в файле
     .col-xs-4
       .form-group
         label(for="right") На что заменяем
-        textarea.js-fixbox.form-control(id="right",name="right")= form ? form.right : 'Google\r\nRambler\r\nYahoo'
+        textarea.js-fixbox.form-control(id="right", name="right")= form ? form.right : ''
       button.btn.btn-primary.pull-right(type="submit") Обработать
-  script(src="/javascripts/2fields-plustopinp.js")
+  script(src="/javascripts/2fields-plusfile-plustopinp.js")
+  script(src="/javascripts/anti-bigfields.js")

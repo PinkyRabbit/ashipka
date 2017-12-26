@@ -47,13 +47,23 @@ app.use( passport.initialize() );
 app.use( passport.session() );
 
 app.get( "*", ( req, res, next ) => {
-    if( req.isAuthenticated() ) {
-        res.locals.imauth = true;
-    } else {
-        res.locals.imauth = false;
-    }
-    next();
+  if( req.isAuthenticated() ) {
+      res.locals.imauth = true;
+  } else {
+      res.locals.imauth = false;
+  }
+  next();
 } );
+
+app.use( ["/spot", "/utils"], ( req, res, next ) => {
+  if( req.isAuthenticated() ) {
+    next();
+  } else {
+    const error = new Error('Вы не вошли на сайт!')
+    error.status = 403
+    return next(error)
+  }
+})
 
 app.use( "/", index );
 app.use( "/login", login );

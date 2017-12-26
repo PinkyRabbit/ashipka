@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .alert.alert-success#info
+    span.glyphicon.glyphicon-info-sign(aria-hidden="true")
+    |  !{form.description}
+  form#form(method="post", action=form.action)
+    .col-xs-12
+      .form-group
+        label(for="text")= form.itemname
+        textarea.form-control#text(name="text", placeholder="Бессмысленно спрашивать себя: и зачем это было нужно? Ради чего так старался? Когда делаешь невозможное, ответ на вопрос «зачем» очевиден: чтобы было. Потому что именно невозможным жив человек, что бы он сам об этом ни думал.")
+    .col-xs-offset-8.col-xs-4#bottom
+      button.btn.btn-primary.pull-right(type="submit") Обработать
+  script(src="/fields/one-textarea-form.js")

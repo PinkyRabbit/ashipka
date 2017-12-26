@@ -5,6 +5,9 @@ body {
 form{
   padding-bottom: 10px
 }
+textarea.form-control{
+  min-height: 250px
+}
 #title{
   background: #272727;
   color: #c7cc00;
@@ -71,8 +74,16 @@ ul.alert li{
 .jumbotron>hr {
     border-top: 2px dashed #222;
 }
-pre.preerr{
-  color: #8e0040
+.spot{
+  border: 1px solid #2a502a;
+}
+.spot ol{
+  margin: 0;
+  padding: 15px;
+}
+pre{
+  color: #86fdff;
+  background-color: #255929;
 }
 .panel-heading span{
   padding: 5px

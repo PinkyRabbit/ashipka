@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  .alert.alert-success#info
+    span.glyphicon.glyphicon-info-sign(aria-hidden="true")
+    |  В итоге получили #{strings} строк
+  .col-xs-12
+    form
+      .form-group
+        textarea.form-control#result(readonly)= result
+  script(src="/fields/one-res.js")

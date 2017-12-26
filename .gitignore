@@ -1,1 +1,7 @@
 node_modules/
+ashipka-old/
+ashipks-windows/
+config.js
+users.json
+public/uploads/*
+.idea/

@@ -1,41 +1,16 @@
-var express = require('express');
-var router = express.Router();
-const url = 'mongodb://usesa:asdqwe1987234@ds145223.mlab.com:45223/ashipka';
-const db = require('monk')(url);
-const ideas = db.get('ideas');
-const moment = require('moment');
+let express = require( "express" );
+let router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  ideas.find({},{sort: {date: -1}}, function(err, posts) {
-    if(err) console.log(err);
-    res.render('index', {
-      title: 'Главная',
-      ideas: posts
-    });
-  })
-});
+router.get( "/", ( req, res, next ) => {
+    const ops = {
+        "h1": "Главная страница сайта",
+        "title": "Сайт, для настоящих джедаев!",
+        "description":
+      "Нам нужно много инструментов, нам нужно много возможностей. Завтра мы будем ещё лучше!"
+    };
 
-router.post('/', function(req, res) {
-  if(req.body.name<3||req.body.name>50||req.body.idea<10||req.body.idea>5000){
-    res.redirect('/');
-  }else{
-    ideas.insert({
-      "owner": req.body.name,
-      "date": moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a'),
-      "idea": req.body.idea,
-      "done": false,
-    }, function(err, idea){
-      if(err){
-        console.log('ERROR', err);
-        res.send(err);
-      } else {
-        req.flash('success','Идея была успешно опубликована!');
-        // res.location('/');
-        res.redirect('/');
-      }
-    });
-  }
-});
+    res.render( "index", ops );
+} );
 
 module.exports = router;

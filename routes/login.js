@@ -1,55 +1,103 @@
-var express = require('express');
-var router = express.Router();
-var mongo = require('mongodb');
-const url = 'mongodb://usesa:asdqwe1987234@ds145223.mlab.com:45223/ashipka';
-const db = require('monk')(url);
-var bcrypt = require('bcryptjs');
-var salt = bcrypt.genSaltSync(10);
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+const config = require( "../config" );
+const https = require( "https" );
+const express = require( "express" );
+const router = express.Router();
+const debug = require( "debug" )( "ashipka:Login" );
+let passport = require( "passport" ),
+    LocalStrategy = require( "passport-local" ).Strategy;
 
-router.get('/', function(req, res) {
-  if(req.isAuthenticated()){
-    req.flash('success','Добро пожаловать домой!');
-    res.location('/admin');
-    res.redirect('/admin');
-  } else {
-    res.render('admin/index-off', { 
-      "title": "Представься, Вершитель!"
-    });  
-  }
-});
+passport.serializeUser( ( user, callback ) => {
+    callback( null, user );
+} );
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+passport.deserializeUser( ( user, callback ) => {
+    callback( null, user );
+} );
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+passport.use(
+    new LocalStrategy( ( username, password, callback ) => {
+        const jsondb = require( "../users" );
+        const { users } = jsondb;
+        const filtred = users.filter( ( x ) => x.username === username );
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    // console.log('LocalStrategy');
-    var users = db.get('users');
-    // console.log('password -> '+password);
-    users.findOne({name: username}, function(err,user){
-      // console.log(user);
-      if (err) {
-        console.log('err:');
-        console.log(err);
-        return done(err); }
-      if (!user) return done(null, false);
-      if(bcrypt.compareSync(password, user.password)) return done(null, user);
-      else return done(null, false);
-    });
-  }
-));
+        if ( filtred.length === 1 ) {
+            const user = filtred[ 0 ];
 
-router.post('/',
-  passport.authenticate('local', {failureRedirect: 'http://hotelpics.ru/gei-zhest-porno-onlain/'}),
-  function(req, res) {
-    res.redirect('/login');
-});
+            debug( user );
+            if ( user.password !== password ) {
+                debug( "Incorrect password." );
+                return callback( null, false );
+            }
+            debug( "Мы вошли на сайт." );
+            return callback( null, user );
+        }
+        debug( "Incorrect username." );
+        return callback( null, false );
+    } )
+);
+
+router
+    .route( "/" )
+    .get( ( req, res ) => {
+        debug( "Login page" );
+        const ops = {
+            "h1": "Войти на сайт",
+            "title": "Вход на сайт",
+            "description":
+        "Кому нех тут делать, тому нех тут делать. И не надо сюда тыкать, а то оторвёт пальцы!",
+            "recapcha": true
+        };
+
+        res.render( "login", ops );
+    } )
+    .post( ( req, res, next ) => {
+        const recaptchaResp = req.body[ "g-recaptcha-response" ];
+
+        if ( recaptchaResp ) {
+            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${
+                config.reCAPTCHA
+            }&response=${recaptchaResp}&remoteip=${req.ip}`;
+
+            https
+                .get( verifyUrl, ( resp ) => {
+                    let data = "";
+
+                    resp.on( "data", ( chunk ) => {
+                        data += chunk;
+                    } );
+
+                    resp.on( "end", () => {
+                        const google = JSON.parse( data );
+
+                        if ( !google.success ) {
+                            debug( "Recaptcha разгадана не верно!" );
+                            res.redirect( "back" );
+                        } else {
+                            debug( google );
+                            next();
+                        }
+                    } );
+                } )
+                .on( "error", ( err ) => {
+                    debug( "Recaptcha ошибка соединения с google!" );
+                    res.redirect( "back" );
+                } );
+        } else {
+            debug( "Recaptcha не введена!" );
+            res.redirect( "back" );
+        }
+    } )
+    .post(
+        passport.authenticate( "local", {
+            "successRedirect": "/spot",
+            "failureRedirect": "/login"
+        } )
+    );
+
+router.get( "/logout", ( req, res ) => {
+    debug( "User Logged Out" );
+    req.logout();
+    res.redirect( "/" );
+} );
 
 module.exports = router;

@@ -1,80 +1,26 @@
 extends layout
 
 block content
-  .col-xs-12.col-sm-4
-    section#form-description
-      h3 Место для гениальных идей
-      p Если вы нашли что-то годное, что можно реализовать - напишите тут, рано или поздно - руки дойдут
-    form(action="/",method="post")
-      .form-group#name
-        label(for="name") Имя или ник
-        input.form-control(type="text", name="name")
-      .form-group
-        label(for="idea") Гениальная идея
-        textarea.form-control#idea(name="idea", placeholder="Например, нужно завоевать галлактику за 28 часов.")
-      button.btn.btn-primary.btn-block(type="submit") Увековечить нетленку
-  .col-xs-12.col-sm-8
-    each idea,i in ideas
-      .col-xs-12.col-sm-6.col-md-4
-        div(class="panel "+(idea.done===true ? 'panel-default' : 'panel-warning'))
-          .panel-heading
-            if idea.done===true
-              span.label.label-primary Сделано
-            else if locals.authxyz===true
-              a.js-upEvent.text-info(href="#", data-up=idea._id)
-                span.glyphicon.glyphicon-ok(aria-hidden="true")
-              a.js-deleteEvent.text-info(href="#", data-delete=idea._id)
-                span.glyphicon.glyphicon-trash(aria-hidden="true")
-            h3.panel-title= idea.owner
-            p(style="margin: 5px 0 0 0;padding: 0", class= idea.done===true ? 'hidden' : 'text-info')
-              span.glyphicon.glyphicon-time(aria-hidden="true")
-              |  #{idea.date}
-          .panel-body(class= idea.done===true ? 'text-muted' : '')= idea.idea
+  .col-xs-12#mainimg
+    img.center-block(src="/images/bg.jpg" atl="картиночка")
   script.
-    $(function() {
-      frameres();
-      setTimeout(function() {
-        frameres();
-      }, 5000);
-      $(window).on('resize', function(){
-        frameres();
-      });
-      function frameres(){
-        if(($(window).height()*3>$(window).width())&&($(window).width()>767)){
-          var messhei = $(window).height()-$('nav').outerHeight(true)-$('#form-description').outerHeight(true)-$('#name').outerHeight(true)-$('.btn-block').outerHeight(true)-100;
-          $('#idea').css({
-            'height': messhei+'px',
-            'max-height': messhei+'px'  
-          });
+    (function(){
+      function onresize(){
+        if($(window).width()>850){
+          if($('#mainimg img').height() > $(window).height() - $('nav').outerHeight() - 70){
+            var hei = $(window).height() - $('nav').outerHeight() - 70
+            $('#mainimg img').attr('height', hei+'px')
+          }else{
+            $('#mainimg img').removeAttr("height");
+            var pad = $(window).height() - $('nav').outerHeight() - $('#mainimg img').height() - 50
+            $('#mainimg').css('padding-top', pad+'px')
+          }
         }else{
-          $('#idea').css({
-            'height': '200px',
-            'max-height': '200px'  
-          });
+          $('#mainimg').removeAttr("style");
+          $('#mainimg img').removeAttr("height");
         }
       }
-      $('.js-deleteEvent').on('click',function(e){
-        e.preventDefault();
-        var r = confirm("Удаляем?");
-        if (r == true) {
-          var deleteId = $(this).data('delete');
-          $.ajax({
-            url : '/admin/idea/del/'+deleteId,
-            type : "DELETE",
-            success : function(result){
-              console.log(result);
-            }
-          });
-          window.location = '/';
-        }
-      });
-      $('.js-upEvent').on('click',function(e){
-        e.preventDefault();
-        var r = confirm("Можно считать завершённым?");
-        if (r == true) {
-          var upId = $(this).data('up');
-          window.location = '/admin/idea/up/'+upId;
-        }
-      });
 
-    }());
+      onresize();
+      $(window).on('resize', onresize)
+    })()

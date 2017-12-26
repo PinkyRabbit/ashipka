@@ -1,3 +1,3 @@
-"# ashipka" 
+# Just a casual toolkit website
 
-На винде ещё скрипты лежат // TODO:!
+[www.ashipka.pw](https://www.ashipka.pw/)

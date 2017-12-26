@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  .col-xs-6.col-sm-4.col-lg-3
+    .jumbotron.spot
+      h3 Допробив
+      em.single Выбирает сайты из базы на допробив
+      br
+      br
+      p
+        a.btn.btn-primary.btn-lg(href="/utils/doprobiv", role="button") Выбрать
+
+  .col-xs-6.col-sm-4.col-lg-3
+    .jumbotron.spot
+      h3 Выбрать хорошие
+      em.single Выбирает только хорошие сайты из плохого отчёта
+      br
+      br
+      p
+        a.btn.btn-primary.btn-lg(href="/utils/truelinks", role="button") Выбрать
+
+  .col-xs-6.col-sm-4.col-lg-3
+    .jumbotron.spot
+      h3 База по доступности
+      em
+        ol
+          li Чистит дубли
+          li Проверяет доступность
+          li Проверяет язык
+      p
+        a.btn.btn-primary.btn-lg(href="/utils/clearbase", role="button") Выбрать
+  .col-xs-6.col-sm-4.col-lg-3
+    .jumbotron.spot
+      h3 Проставляет http
+      em
+        ol
+          li Проставляет http
+          li Проставляет www
+      p
+        a.btn.btn-primary.btn-lg(href="/utils/makehttp", role="button") Выбрать
+
+  .col-xs-6.col-sm-4.col-lg-3
+    .jumbotron.spot
+      h3 Соединяем базы
+      em
+        ol
+          li Соединяет несколько баз
+          li Чистит дубли
+      p
+        a.btn.btn-primary.btn-lg(href="/utils/mergebase", role="button") Выбрать

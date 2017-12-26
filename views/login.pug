@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3
+    .jumbotron
+      h2 Привет!
+      em Теперь твоя очередь рассказывать. Кто ты, что ты, зачем ты есть?.. Ладно, ладно, на последний вопрос можешь не отвечать, этого никто толком не знает, так все и живем, сами не понимаем, во что влипли и на кой оно нам сдалось.
+      hr
+      form(action="/login", method="post")
+        .form-group
+          label(for="username") Никнейм
+          input.form-control#username(type="text", name="username")
+        .form-group
+          label(for="password") Пароль
+          input.form-control#password(type="password", name ="password")
+        .form-group
+          .g-recaptcha(data-sitekey="6LfIQT4UAAAAAAEqLelVPTUASOC9Cdz4s_cr1ir8")
+        button.btn.btn-danger(type="submit") Войти

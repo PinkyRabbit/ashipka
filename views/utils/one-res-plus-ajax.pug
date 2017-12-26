@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .alert.alert-success#info
+    span.glyphicon.glyphicon-info-sign(aria-hidden="true")
+    |  Ждите, идёт обработка!
+  .col-xs-12#progress
+    .progress
+      .progress-bar#bar(role="progressbar" style="width: 0%")
+  .col-xs-12
+    form
+      .form-group(style="display:none")
+        textarea.form-control#result(readonly)= result
+  script(src=scr)
+  script(src="/fields/one-res-plus-ajax.js")

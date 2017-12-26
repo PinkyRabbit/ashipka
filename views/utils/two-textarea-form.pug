@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  .alert.alert-success#info
+    span.glyphicon.glyphicon-info-sign(aria-hidden="true")
+    |  !{form.description}
+  form#form(method="post", action=form.action)
+    .col-xs-12.col-sm-4
+      .form-group
+        label(for="field1")= form.col1
+        textarea.form-control#field1(name="field1")
+    .col-xs-12.col-sm-8
+      .form-group
+        label(for="field2")= form.col2
+        textarea.form-control#field2(name="field2")
+    .col-xs-offset-8.col-xs-4#bottom
+      button.btn.btn-primary.pull-right(type="submit") Обработать
+  script(src="/fields/two-textarea-form.js")

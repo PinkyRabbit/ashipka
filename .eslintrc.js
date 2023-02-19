@@ -39,6 +39,7 @@ module.exports = {
       },
     ],
     "react-hooks/rules-of-hooks": 2, // Checks rules of Hooks
-    "quotes": [2, "double"]
+    "quotes": [2, "double"],
+    "semi": [2, "always"]
   }
 };

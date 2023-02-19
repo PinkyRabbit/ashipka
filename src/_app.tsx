@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
-import "./styles.css";
+import "hack/dist/dark-grey.css";
 
 export const App = () => {
   return (
@@ -8,4 +8,4 @@ export const App = () => {
       <RouterProvider router={router} />
     </div>
   );
-}
+};

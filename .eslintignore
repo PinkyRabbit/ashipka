@@ -1,0 +1,4 @@
+node_modules/
+ashipka-old/
+.eslintrc.js
+*.config.js

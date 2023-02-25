@@ -1,11 +1,18 @@
-import { HomePageWrapper } from "./Home.styled";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
+const ListWrapper = styled.ul`
+    list-style-type: disclosure-closed;
+    padding: 20px;
+    font-size: 1.3em;
+`;
 
 export const Home = () => {
     return (
-        <HomePageWrapper>
-            <h1>Home page</h1>
-        </HomePageWrapper>
-
+        <ListWrapper className="text-primary">
+            <li>
+                <Link to="/doprobiv">Допробив</Link>
+            </li>
+        </ListWrapper>
     );
 };

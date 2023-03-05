@@ -31,6 +31,7 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
+    "@typescript-eslint/no-explicit-any": 0,
     "react/react-in-jsx-scope": 0,
     "react/function-component-definition": [
       2,

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouteObject, Navigate } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
 import { Doprobiv } from "./pages/Doprobiv/Doprobiv";
+import { Truelinks } from "./pages/Truelinks";
 
 const routes: RouteObject[] = [
   {
@@ -12,9 +13,13 @@ const routes: RouteObject[] = [
     element: <Doprobiv />,
   },
   {
+    path: "/good-links",
+    element: <Truelinks />,
+  },
+  {
     path: "*",
-    element: <Navigate to="/" />
-  }
+    element: <Navigate to="/" />,
+  },
 ];
 
 export const router = createBrowserRouter(routes);

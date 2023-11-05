@@ -2,7 +2,7 @@
   "name": "achipka-2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/ashipka",
+  "homepage": "https://pinkyrabbit.github.io/ashipka",
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
     "@testing-library/jest-dom": "^5.16.5",

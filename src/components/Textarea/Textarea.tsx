@@ -1,14 +1,20 @@
 import { useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Wrapper, TextareaStyled, Label } from "./Textarea.styles";
+import { Wrapper, TextareaStyled, Label, HintContent } from "./Textarea.styles";
+
+interface IHint {
+  description: string;
+  count: string;
+}
 
 interface ITextarea extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   fieldName: string;
   label: string;
   formHook: UseFormReturn<any, any>;
+  hint?: IHint;
 }
 
-export const Textarea = ({ children, fieldName, label, className, formHook }: ITextarea) => {
+export const Textarea = ({ children, fieldName, label, hint, className, formHook }: ITextarea) => {
   const textareaClass = useMemo(() => {
     const c: string[] = ["form-control"];
     if (className) {
@@ -35,6 +41,11 @@ export const Textarea = ({ children, fieldName, label, className, formHook }: IT
       >
         {children}
       </TextareaStyled>
+      {hint && (
+        <HintContent>
+          {hint.description} <span>{hint.count}</span>
+        </HintContent>
+      )}
     </Wrapper>
   );
 };

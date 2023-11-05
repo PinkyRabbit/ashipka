@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -34,7 +34,7 @@ export const Doprobiv = () => {
   const resolver = yupResolver(schema);
   const formHook = useForm<IData>({ resolver });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { report, baseList } = formHook.getValues();
     if (!isLoading || !report || !baseList) {
       return;

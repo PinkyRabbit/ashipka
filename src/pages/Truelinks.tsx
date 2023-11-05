@@ -1,9 +1,10 @@
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useLoader } from "providers";
 import { Button, PageDescription, Textarea, TextareaWrapper, TextareaResult } from "components";
+import { DOMAIN_REGEX } from "../constants";
 
 type IData = {
   baseList: string;
@@ -40,16 +41,14 @@ export const Truelinks = () => {
   const resolver = yupResolver(schema);
   const formHook = useForm<IData>({ resolver });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { report, baseList } = formHook.getValues();
     if (!isLoading || !report || !baseList) {
       return;
     }
     showLoader(false);
 
-    const domainRegex = /https?:\/\/(www\.)?([a-z0-9-]+\.)+[a-z0-9-]+/gm;
-
-    const baseDomainsList = baseList.toLowerCase().match(domainRegex);
+    const baseDomainsList = baseList.toLowerCase().match(DOMAIN_REGEX);
     if (!Array.isArray(baseDomainsList)) {
       formHook.setError("baseList", { type: "required" });
       return;
@@ -60,7 +59,7 @@ export const Truelinks = () => {
       .toLowerCase()
       .split("\n")
       .filter(line => {
-        const domainInLine = line.match(domainRegex);
+        const domainInLine = line.match(DOMAIN_REGEX);
         if (!domainInLine) {
           return false;
         }

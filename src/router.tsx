@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouteObject, Navigate } from "react-router-dom";
-import { Home } from "./pages/Home/Home";
-import { Doprobiv } from "./pages/Doprobiv/Doprobiv";
+import { Home } from "./pages/Home";
+import { Doprobiv } from "./pages/Doprobiv";
 import { Truelinks } from "./pages/Truelinks";
 
 const routes: RouteObject[] = [

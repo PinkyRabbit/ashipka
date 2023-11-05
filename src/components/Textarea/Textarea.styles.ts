@@ -18,3 +18,11 @@ export const TextareaStyled = styled.textarea<{ hasErrors?: boolean }>`
 `;
 
 export const Label = styled.label``;
+
+export const HintContent = styled.p`
+  color: #ff44ff;
+
+  & span {
+    color: #33ffff;
+  }
+`;

@@ -31,6 +31,7 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
+    "@typescript-eslint/no-explicit-any": 0,
     "react/react-in-jsx-scope": 0,
     "react/function-component-definition": [
       2,
@@ -39,6 +40,7 @@ module.exports = {
       },
     ],
     "react-hooks/rules-of-hooks": 2, // Checks rules of Hooks
-    "quotes": [2, "double"]
+    "quotes": [2, "double"],
+    "semi": [2, "always"]
   }
 };

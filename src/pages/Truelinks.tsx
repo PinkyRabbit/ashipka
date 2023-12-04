@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useLoader } from "providers";
 import { Button, PageDescription, Textarea, TextareaWrapper, TextareaResult } from "components";
-import { MATCH_DOMAIN_REGEX } from "../constants";
+import { getBaseIntersection } from "helpers/domains";
 
 type IData = {
   baseList: string;
@@ -47,26 +47,7 @@ export const Truelinks = () => {
       return;
     }
     showLoader(false);
-
-    const baseDomainsList = baseList.toLowerCase().match(MATCH_DOMAIN_REGEX);
-    if (!Array.isArray(baseDomainsList)) {
-      formHook.setError("baseList", { type: "required" });
-      return;
-    }
-    const baseDomainsSet = new Set(baseDomainsList);
-
-    const goodLinks = report
-      .toLowerCase()
-      .split("\n")
-      .filter(line => {
-        const domainInLine = line.match(MATCH_DOMAIN_REGEX);
-        if (!domainInLine) {
-          return false;
-        }
-        return baseDomainsSet.has(domainInLine[0]);
-      });
-
-    setResult(goodLinks);
+    setResult(getBaseIntersection(baseList, report));
   }, [isLoading]);
 
   const onSubmit = () => {

@@ -173,4 +173,22 @@ describe("domains", () => {
     });
 
   });
+
+  describe("- getBaseIntersection", () => {
+    it ("shell get intersected domains only", () => {
+      const domain1 = "http://test.unit-test.one-more-test.com";
+      const domain2 = "http://unit-test.one-more-test2.com";
+      const domain3 = "http://www.test3.com";
+      const domain4 = "http://www.test4.com";
+      const domain5 = "http://www.test5.com";
+      const input1 = ` sagf ${domain1} http www ${domain2} ${domain3} ${domain4} ${domain5} ${domain1} `;
+      const input2 = ` sagf ${domain1} http www ${domain3} ${domain5} ${domain1} `;
+      const result = domainsHelpers.getBaseIntersection(input1, input2);
+      expect(Array.isArray(result)).toBeTruthy();
+      expect(result.length).toEqual(3);
+      expect(result[0]).toEqual(domain1);
+      expect(result[1]).toEqual(domain3);
+      expect(result[2]).toEqual(domain5);
+    });
+  });
 });

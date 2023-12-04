@@ -51,3 +51,19 @@ export const extractNotUsedDomains = (base: string, used: string): string[] => {
 
   return baseDomains.filter(domain => !usedDomainsNoHttpSet.has(domain.replace(HTTP_WWW_REGEX, "")));
 };
+
+/**
+ * Helper to extract domains intersection
+ * @param inputString - input string
+ */
+export const getBaseIntersection = (input1: string, input2: string): string[] => {
+    const input1Domains = extractDomains(input1);
+    const input2Domains = extractDomains(input2);
+    const arrayToCompare = input1Domains.length < input2Domains.length ? input1Domains : input2Domains;
+    const arrayToSet = input1Domains.length < input2Domains.length ? input2Domains : input1Domains;
+    const domainsSet: Set<string> = new Set();
+    arrayToSet.forEach((domain) => {
+      domainsSet.add(domain.replace(HTTP_WWW_REGEX, ""));
+    });
+  return arrayToCompare.filter(domain => domainsSet.has(domain.replace(HTTP_WWW_REGEX, "")));
+};

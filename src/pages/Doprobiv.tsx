@@ -58,7 +58,7 @@ export const Doprobiv = () => {
     <>
       <PageDescription>{DESCRIPTION}</PageDescription>
       {result ? (
-        <TextareaResult reset={reset}>{result?.join("\n")}</TextareaResult>
+        <TextareaResult reset={reset} lines={result.length}>{result?.join("\n")}</TextareaResult>
       ) : (
         <form onSubmit={formHook.handleSubmit(onSubmit)}>
           <TextareaWrapper>

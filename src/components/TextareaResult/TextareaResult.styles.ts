@@ -15,8 +15,8 @@ export const TextareaWrapper = styled.div`
 export const Textarea = styled.textarea`
   width: 100%;
   height: 30vh;
-  background: #181818;
-  color: #9abd63;
+  background: var(--color-bg-secondary);
+  color: var(--color-content-secondary);
   resize: none;
   margin-bottom: 30px;
 
@@ -28,9 +28,19 @@ export const CopyButton = styled.button`
   bottom: 36px;
   left: 0;
   z-index: 1;
-  color: #404040;
-  background: #66d766;
+  color: var(--color-copy-button-text);
+  background: var(--color-copy-button-bg);
   font-size: 1.2em;
   padding: 5px 2px;
   border: none;
+`;
+
+export const ResultDescriptionSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const ResultDescription = styled.div`
+  color: var(--color-content-secondary);
 `;

@@ -1,18 +1,32 @@
+:root {
+  --color-link: #0f0;
+  --color-link-hover: #00b300;
+  --color-content: #0c0;
+  --color-content-secondary: #9abd63;
+  --color-content-yellow: #ccd5a7;
+  --color-bg: #222;
+  --color-bg-secondary: #181818;
+  --color-copy-button-text: #404040;
+  --color-copy-button-bg: #66d766;
+  --color-pink: #ff44ff;
+  --color-blue: #33ffff;
+}
+
 body {
   font-family: Monospace;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #0c0;
-  background-color: #222;
+  color: var(--color-content);
+  background-color: var(--color-bg);
 }
 
 a {
-  color: #0f0;
+  color: var(--color-link);
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #00b300;
+  color: var(--color-link-hover);
   text-decoration: underline;
 }
 a:focus {

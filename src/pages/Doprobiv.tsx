@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useLoader } from "providers";
 import { Button, PageDescription, Textarea, TextareaWrapper, TextareaResult } from "components";
+import { extractNotUsedDomains } from "../helpers/domains";
 
 type IData = {
   baseList: string;
@@ -40,22 +41,7 @@ export const Doprobiv = () => {
       return;
     }
     showLoader(false);
-
-    const domainRegex = /https?:\/\/(www\.)?([a-z0-9-]+\.)+[a-z0-9-]+/gm;
-
-    const domainsInReport = report.toLowerCase().match(domainRegex);
-    if (!Array.isArray(domainsInReport)) {
-      formHook.setError("report", { type: "required" });
-      return;
-    }
-    const domainsInReportSet = new Set(...domainsInReport);
-
-    const baseDomainsList = baseList.toLowerCase().match(domainRegex);
-    if (!Array.isArray(baseDomainsList)) {
-      formHook.setError("baseList", { type: "required" });
-      return;
-    }
-    const notUsedDomains = baseDomainsList.filter(domain => !domainsInReportSet.has(domain));
+    const notUsedDomains = extractNotUsedDomains(baseList, report);
     setResult(notUsedDomains);
   }, [isLoading]);
 
@@ -72,7 +58,7 @@ export const Doprobiv = () => {
     <>
       <PageDescription>{DESCRIPTION}</PageDescription>
       {result ? (
-        <TextareaResult reset={reset}>{result?.join("\n")}</TextareaResult>
+        <TextareaResult reset={reset} lines={result.length}>{result?.join("\n")}</TextareaResult>
       ) : (
         <form onSubmit={formHook.handleSubmit(onSubmit)}>
           <TextareaWrapper>

@@ -1,20 +1,21 @@
+import { extractDomains } from "helpers/domains";
 import { useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { Wrapper, TextareaStyled, Label, HintContent } from "./Textarea.styles";
 
 interface IHint {
   description: string;
-  count: string;
+  count: number;
 }
 
 interface ITextarea extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   fieldName: string;
   label: string;
   formHook: UseFormReturn<any, any>;
-  hint?: IHint;
+  isNotDomains?: IHint;
 }
 
-export const Textarea = ({ children, fieldName, label, hint, className, formHook }: ITextarea) => {
+export const Textarea = ({ children, fieldName, label, isNotDomains, className, formHook }: ITextarea) => {
   const textareaClass = useMemo(() => {
     const c: string[] = ["form-control"];
     if (className) {
@@ -28,6 +29,15 @@ export const Textarea = ({ children, fieldName, label, hint, className, formHook
       formHook.clearErrors(fieldName);
     }
   };
+
+  const hint: IHint | null = useMemo(() => {
+    if (isNotDomains) {
+      return null;
+    }
+    const input = formHook.getValues(fieldName);
+    const domains = extractDomains(input || "");
+    return { description: "Total domains", count: domains.length };
+  }, [formHook.watch(fieldName)]);
 
   return (
     <Wrapper>

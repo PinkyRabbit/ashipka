@@ -20,9 +20,9 @@ export const TextareaStyled = styled.textarea<{ hasErrors?: boolean }>`
 export const Label = styled.label``;
 
 export const HintContent = styled.p`
-  color: #ff44ff;
+  color: var(--color-pink);
 
   & span {
-    color: #33ffff;
+    color: var(--color-blue);
   }
 `;
